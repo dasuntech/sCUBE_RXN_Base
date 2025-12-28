@@ -60,9 +60,9 @@ void main(void)
 	while(1)
 	{
 		// 메인 루프
-		// string_Tx("Hello TMS320F28335 !!");
-		// DELAY_US(100000);
-		Solenoid_Test_Sequence();
+		string_Tx("Hello TMS320F28335 !!");
+		DELAY_US(100000);
+		// Solenoid_Test_Sequence();
 
 	}
 }
