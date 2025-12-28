@@ -1,0 +1,28 @@
+# CCS Build Artifacts (빌드 결과물 및 임시 폴더 제외)
+[Dd]ebug/
+[Rr]elease/
+*.obj
+*.opt
+*.out
+*.map
+*.hex
+*.lkf
+*.mk
+*.bak
+*.log
+*.tlb
+
+# CCS Project Metadata (프로젝트 설정 파일은 유지하되 로컬 설정은 제외)
+.metadata/
+.launches/
+*.tmp
+*.js
+
+# 단, 프로젝트 설정 파일(.cproject, .project, .ccsproject)은
+# 반드시 GitHub에 올려야 다른 PC에서도 CCS 설정을 불러올 수 있습니다.
+!*.cproject
+!*.project
+!*.ccsproject
+
+# VS Code Settings (팀원과 공유할 게 아니라면 제외 추천)
+.vscode/
