@@ -78,12 +78,13 @@ void InitSciaGpio()
    SciaRegs.SCICTL1.bit.SWRESET = 0;      // 설정 중 오동작 방지를 위해 리셋 상태로 진입
    SciaRegs.SCICCR.all = 0x0007;          // 통신 포맷: 8 Data bits, 1 Stop bit, No Parity
    SciaRegs.SCICTL1.all = 0x0003;         // 통신 모드: RX, TX 활성화
+
    // Baud Rate 설정 (LSPCLK = 37.5MHz, 115200bps 기준)
    // BRR = (LSPCLK / (Baud * 8)) - 1
    // BRR = (37500000 / (115200 * 8)) - 1 = 약 40 (0x0028)
-   // 테스트를 위해서 9600 bps로 설정
-   SciaRegs.SCIHBAUD = 0x1;
-   SciaRegs.SCILBAUD = 0xE7;
+   SciaRegs.SCIHBAUD = 0x0000;
+   SciaRegs.SCILBAUD = 0x0028;
+   
    SciaRegs.SCICTL1.bit.SWRESET = 1;     // Relinquish SCI from Reset
 
    EDIS;  // 보호 레지스터 쓰기 금지

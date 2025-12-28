@@ -69,15 +69,20 @@ void InitXintf(void)
     // double all Zone read/write lead/active/trail timing
     XintfRegs.XTIMING0.bit.X2TIMING = 1;
 
-    // Zone will sample XREADY signal
-    XintfRegs.XTIMING0.bit.USEREADY = 1;
-    XintfRegs.XTIMING0.bit.READYMODE = 1;  // sample asynchronous
+    // Zone will sample XREADY signal(Default = 1)
+    // 8255(PPI) 칩을 사용할 경우 Ready(Wait) 신호 핀이 없기 때문에 USEREADY는 0으로 설정
+    XintfRegs.XTIMING0.bit.USEREADY = 0;
+    XintfRegs.XTIMING0.bit.READYMODE = 0;  // sample asynchronous
 
     // Size must be either:
     // 0,1 = x32 or
     // 1,1 = x16 other values are reserved
     XintfRegs.XTIMING0.bit.XSIZE = 3;
 
+    // Zone 6와 Zone 7 영역에 별도의 메모리나 FPGA 같은 장치가 연결되어 있지 않다면,
+    // InitXintf16Gpio() 함수에서 Zone 6(GPIO28)와 Zone 7(GPIO37) 설정을 과감히 주석 처리하여, 
+    // 해당 핀들이 시리얼 통신이나 일반 입출력용으로 자유롭게 쓰일 수 있도록 풀어주어야 합니다.
+/* ---
     // Zone 6------------------------------------
     // When using ready, ACTIVE must be 1 or greater
     // Lead must always be 1 or greater
@@ -89,14 +94,11 @@ void InitXintf(void)
     XintfRegs.XTIMING6.bit.XRDLEAD = 3;
     XintfRegs.XTIMING6.bit.XRDACTIVE = 7;
     XintfRegs.XTIMING6.bit.XRDTRAIL = 3;
-
     // double all Zone read/write lead/active/trail timing
     XintfRegs.XTIMING6.bit.X2TIMING = 1;
-
     // Zone will sample XREADY signal
     XintfRegs.XTIMING6.bit.USEREADY = 1;
     XintfRegs.XTIMING6.bit.READYMODE = 1;  // sample asynchronous
-
     // Size must be either:
     // 0,1 = x32 or
     // 1,1 = x16 other values are reserved
@@ -133,6 +135,7 @@ void InitXintf(void)
     // This will help avoid bus contention.
     XintfRegs.XBANK.bit.BANK = 7;
     XintfRegs.XBANK.bit.BCYC = 7;
+ --- */
     EDIS;
    //Force a pipeline flush to ensure that the write to
    //the last register configured occurs before returning.
@@ -222,18 +225,22 @@ void InitXintf16Gpio()
      GpioCtrlRegs.GPCMUX2.bit.GPIO85 = 3;  // XA13
      GpioCtrlRegs.GPCMUX2.bit.GPIO86 = 3;  // XA14
      GpioCtrlRegs.GPCMUX2.bit.GPIO87 = 3;  // XA15
-     GpioCtrlRegs.GPBMUX1.bit.GPIO39 = 3;  // XA16
-     GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 3;  // XA17
-     GpioCtrlRegs.GPAMUX2.bit.GPIO30 = 3;  // XA18
-     GpioCtrlRegs.GPAMUX2.bit.GPIO29 = 3;  // XA19
+     // N/A
+     // GpioCtrlRegs.GPBMUX1.bit.GPIO39 = 3;  // XA16
+     // CAN-TX
+     // GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 3;  // XA17
+     // CAN-RX
+     // GpioCtrlRegs.GPAMUX2.bit.GPIO30 = 3;  // XA18
+     // SCI-A 시리얼통신 TXD 
+     // GpioCtrlRegs.GPAMUX2.bit.GPIO29 = 3;  // XA19
 
-     GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 3;  // XREADY
-	 GpioCtrlRegs.GPBMUX1.bit.GPIO35 = 3;  // XRNW
+     //GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 3;  // XREADY
+	GpioCtrlRegs.GPBMUX1.bit.GPIO35 = 3;  // XRNW
      GpioCtrlRegs.GPBMUX1.bit.GPIO38 = 3;  // XWE0
 
      GpioCtrlRegs.GPBMUX1.bit.GPIO36 = 3;  // XZCS0
-     GpioCtrlRegs.GPBMUX1.bit.GPIO37 = 3;  // XZCS7
-     GpioCtrlRegs.GPAMUX2.bit.GPIO28 = 3;  // XZCS6
+     // GpioCtrlRegs.GPBMUX1.bit.GPIO37 = 3;  // XZCS7
+     // GpioCtrlRegs.GPAMUX2.bit.GPIO28 = 3;  // XZCS6
      EDIS;
 }
 

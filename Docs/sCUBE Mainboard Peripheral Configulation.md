@@ -1,0 +1,74 @@
+Radiopharmaceuticals Synthsizer Equipment
+
+CPU : TMS320F28445 
+- 내부 타이머를 이용해서 시간을 계산
+- 외부 인터페이스(XINTF : External Interface)를 사용해서 82C55 4개를 구동
+- ADC
+	- ADCINA0 : AD595AQ에서 들어오는 Analog Value를 LM324 통해서 3.3V Level Down 후 입력 (K type Thermocoupler)
+- GPIO
+	- GPIO0 : SSR_1_Enable(Heater 1번 Enable)
+	- GPIO1 : SSR_2_Enable(Heater 2번 Enable)
+	- GPIO2 : CPAIR_Enable(Diaphragm Pump 1번 Enable)
+	- GPIO3 : CPAIR_PWM(Diaphragm Pump 1번 PWM Input)
+	- GPIO4 : VACUUM_PWM(Diaphragm Pump 2번 PWM Input)
+	- GPIO5 : VACUUM_Enable(Diaphragm Pump 2번 Enable)	
+	- GPIO24 : Not Assign
+	- GPIO24 : Not Assign
+	- GPIO26 : Not Assign(ECAP2)
+	- GPIO27 : Not Assign(ECAP1)
+	- GPIO12 : /RESET
+	- GPIO13 : /INT	
+	- GPIO48 : STATUS_LED와 연결
+	- GPIO49 : POWER_LED와 연결
+	- GPIO06 : SOL_01(Solenoid Valve 01)과 연결
+	- GPIO07 : SOL_02(Solenoid Valve 02)과 연결
+	- GPIO08 : SOL_03(Solenoid Valve 03)과 연결
+	- GPIO09 : SOL_04(Solenoid Valve 04)과 연결
+	- GPIO10 : SOL_05(Solenoid Valve 05)과 연결
+	- GPIO11 : SOL_06(Solenoid Valve 06)과 연결
+	- GPIO50 : SOL_07(Solenoid Valve 07)과 연결
+	- GPIO51 : SOL_08(Solenoid Valve 08)과 연결
+	- GPIO52 : SOL_09(Solenoid Valve 09)과 연결
+	- GPIO53 : SOL_10(Solenoid Valve 10)과 연결
+	- GPIO54 : SOL_11(Solenoid Valve 11)과 연결
+	- GPIO55 : SOL_12(Solenoid Valve 12)과 연결
+	- GPIO56 : SOL_13(Solenoid Valve 13)과 연결
+	- GPIO57 : SOL_14(Solenoid Valve 14)과 연결
+	- GPIO58 : SOL_15(Solenoid Valve 15)과 연결
+	- GPIO59 : SOL_16(Solenoid Valve 16)과 연결
+	- GPIO60 : Not Assign
+	- GPIO61 : 8255_RESET	
+	- GPIO36 : XZCS0(External Interface CS0)
+	- GPIO38 : XWE0(External Interface WE)
+	- GPIO40 : XA0(External Interface A0)
+	- GPIO41 : XA1(External Interface A1)
+	- GPIO42 : XA2(External Interface A2)
+	- GPIO43 : XA3(External Interface A3)
+	- GPIO44 : XA4(External Interface A4)	
+	- GPIO72 : XD7(External Interface D7)
+	- GPIO73 : XD6(External Interface D6)
+	- GPIO74 : XD5(External Interface D5)
+	- GPIO75 : XD4(External Interface D4)
+	- GPIO76 : XD3(External Interface D3)
+	- GPIO77 : XD2(External Interface D2)
+	- GPIO78 : XD1(External Interface D1)
+	- GPIO79 : XD0(External Interface D0)	
+- 시리얼통신
+	- GPIO28 : SCIRXDA - ADM3251E Rout와 연결 (Serial 1 RXD)
+	- GPIO29 : SCITXDA - ADM3251E Tin와 연결 (Serial 1 TXD)
+	- GPIO15 : SCIRXDB - ADM3251E Rout와 연결 (Serial 2 RXD)
+	- GPIO14 : SCITXDB - ADM3251E Tin와 연결 (Serial 2 TXD)
+	- GPIO62 : SCIRXDC - ADM3251E Rout와 연결 (Serial 3 RXD)
+	- GPIO63 : SCITXDC - ADM3251E Tin와 연결 (Serial 3 TXD)	
+- I2C (0x49 : TMP102, 0x62 : MCP9600, 0x60 : MCP4725A0T-E)
+	- GPIO32 : SDA (I2C 장치와 연결)
+	- GPIO33 : SCL (I2C 장치와 연결)	
+- SPI
+	- GPIO16 : MOSI (SPI 장치와 연결)
+	- GPIO17 : MISO (SPI 장치와 연결)
+	- GPIO18 : SCK (SPI 장치와 연결)
+	- GPIO19 : SPI_SS1 (SPI 장치와 연결)
+	- GPIO20 : SPI_SS2 (SPI 장치와 연결)
+	- GPIO21 : SPI_SS3 (SPI 장치와 연결)
+	- GPIO22 : SPI_SS4 (SPI 장치와 연결)
+	- GPIO23 : SPI_SS5 (SPI 장치와 연결)
